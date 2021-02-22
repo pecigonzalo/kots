@@ -22,6 +22,9 @@ func KotsadmTag(options types.KotsadmOptions) string {
 }
 
 func KotsadmTagForVersionString(kotsVersion string) string {
+	if kotsVersion == "" {
+		return "alpha"
+	}
 	version, err := semver.NewVersion(kotsVersion)
 	if err != nil {
 		return "alpha"
@@ -34,7 +37,6 @@ func KotsadmTagForVersionString(kotsVersion string) string {
 	if !strings.HasPrefix(kotsVersion, "v") {
 		kotsVersion = fmt.Sprintf("v%s", kotsVersion)
 	}
-
 	return kotsVersion
 }
 
